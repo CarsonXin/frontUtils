@@ -5,7 +5,7 @@ import Home from '@/views/Home.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
+export const routes = [
     {
         path: '/',
         component: Layout,
@@ -14,7 +14,7 @@ const routes = [
             {
                 path: '/home',
                 name: 'home',
-                component: Home
+                component: Home,
             },
             {
                 path: '/about',
@@ -26,7 +26,6 @@ const routes = [
             },
         ],
     },
-
 ]
 
 const router = new VueRouter({

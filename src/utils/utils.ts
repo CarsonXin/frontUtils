@@ -21,3 +21,17 @@ export function combineURLs(baseURL: string = '', relativeURL: string = '') {
     return relativeURL ? baseURL.replace(/\/+$/, '') + '/' +
         relativeURL.replace(/^\/+/, '') : baseURL
 }
+
+export function validatePhoneNum(phone: string | number): boolean {
+    return /^1[345678][0-9]\d{8}$/.test(phone.toString())
+}
+
+export function priceFormatter(price: any) {
+    if (isNaN(price)) {
+        return price
+    } else if (price) {
+        return Number(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+    } else {
+        return 0
+    }
+}
