@@ -35,3 +35,32 @@ export function priceFormatter(price: any) {
         return 0
     }
 }
+
+export function isImage(fileType: string) {
+    return /^(image\/jpeg|image\/png)$/i.test(fileType)
+}
+
+export function transUint8Array(dataUrl: string) {
+    let arr = dataUrl.split(',')
+    let bstr = atob(arr[1])
+    let n = bstr.length
+    let u8arr = new Uint8Array(n)
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n)
+    }
+    return u8arr
+}
+
+export function dataURLtoBlob(dataUrl: string) {
+    let arr = dataUrl.split(',')
+    // @ts-ignore
+    let mime = arr[0].match(/:(.*?);/)[1]
+    return new Blob([transUint8Array(dataUrl)], { type: mime })
+}
+
+export function dataURLtoFile(dataUrl: string, filename: string) {
+    let arr = dataUrl.split(',')
+    // @ts-ignore
+    let mime = arr[0].match(/:(.*?);/)[1]
+    return new File([transUint8Array(dataUrl)], filename, { type: mime })
+}
